@@ -16,7 +16,7 @@ Este proyecto es una API REST que permite **almacenar y consultar datos poblacio
 
 ## 🚀 Cómo ejecutar el proyecto
 
-### 🔁 Usar imagen desde Docker Hub (recomendado)
+### 🔁 Usar imagen desde Docker Hub
 
 Puedes levantar todo el entorno sin necesidad de compilar nada:
 
