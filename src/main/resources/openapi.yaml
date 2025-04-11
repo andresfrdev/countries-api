@@ -1,0 +1,58 @@
+openapi: 3.0.3
+info:
+  title: Countries API
+  version: 1.0.0
+
+paths:
+  /api/v1/country:
+    get:
+      summary: Get population data of all countries
+      operationId: getCountryData
+      tags:
+        - Countries
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Country'
+
+    post:
+      summary: Fetch country data from external API and save/update it
+      operationId: saveCountry
+      tags:
+        - Countries
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+              required:
+                - name
+      responses:
+        '200':
+          description: Country data fetched and saved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Country'
+        '404':
+          description: Country not found
+
+components:
+  schemas:
+    Country:
+      type: object
+      properties:
+        name:
+          type: string
+        population:
+          type: integer
+          format: int64

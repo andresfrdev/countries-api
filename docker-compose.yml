@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: ddbb_postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: sdg
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: Admin2025
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  countries-api:
+    image: andresfrdev/countries-api:latest
+    container_name: countries_api
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/sdg
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: Admin2025
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    restart: always
+
+volumes:
+  postgres_data:
